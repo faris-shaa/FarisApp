@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/modules/web_view/web_view_screen.dart';
 import 'package:project/shared/cubit/cubit.dart';
 
 class CostumTextFormFeild extends StatelessWidget
@@ -196,60 +197,124 @@ Widget myDivider() =>  Container(
   color: Colors.grey[300],
 );
 
-Widget buildArticleItems(article, context) => Padding(
-  padding: const EdgeInsets.all(20.0),
-  child: Row(
-    children:
-    [
-      Container(
-        height: 140.0,
-        width: 140.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          image: DecorationImage(
-            image: NetworkImage('${article['urlToImage']}'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      SizedBox(
-        width: 20.0,
-      ),
-      Expanded(
-        child: Container(
-          height: 120.0,
-          child: Column(
+Widget buildArticleItems(article, context) => InkWell(
 
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children:
-            [
-              Expanded(
-                child: Text(
-                  '${article['title']}',
-                  style: Theme.of(context).textTheme.bodyText1,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Text(
-                '${article['publishedAt']}',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
+  onTap: ()
+  {
+    NavgateTo(context, WebViewScreen(article['url']),);
+  },
+  child:   Padding(
+
+    padding: const EdgeInsets.all(20.0),
+
+    child: Row(
+
+      children:
+
+      [
+
+        Container(
+
+          height: 140.0,
+
+          width: 140.0,
+
+          decoration: BoxDecoration(
+
+            borderRadius: BorderRadius.circular(10.0),
+
+            image: DecorationImage(
+
+              image: NetworkImage('${article['urlToImage']}'),
+
+              fit: BoxFit.cover,
+
+            ),
+
           ),
+
         ),
-      ),
-    ],
+
+        SizedBox(
+
+          width: 20.0,
+
+        ),
+
+        Expanded(
+
+          child: Container(
+
+            height: 120.0,
+
+            child: Column(
+
+
+
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              mainAxisAlignment: MainAxisAlignment.start,
+
+              children:
+
+              [
+
+                Expanded(
+
+                  child: Text(
+
+                    '${article['title']}',
+
+                    style: Theme.of(context).textTheme.bodyText1,
+
+                    maxLines: 3,
+
+                    overflow: TextOverflow.ellipsis,
+
+                  ),
+
+                ),
+
+                Text(
+
+                  '${article['publishedAt']}',
+
+                  style: TextStyle(
+
+                    color: Colors.grey,
+
+                  ),
+
+                ),
+
+              ],
+
+            ),
+
+          ),
+
+        ),
+
+      ],
+
+    ),
+
   ),
 );
 
 
 
 Widget articleBuilder(list, context) => ListView.separated(
+
   physics: const BouncingScrollPhysics(),
   itemBuilder: (context, index) => buildArticleItems(list[index], context),
   separatorBuilder: (context, index) => myDivider(),
   itemCount: list.length,);
+
+
+void NavgateTo (context, widget) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
