@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/layout/news_app/cubit/cubit.dart';
+import 'package:project/layout/news_app/cubit/mode_theme/modetheme_cubit.dart';
 import 'package:project/layout/news_app/cubit/states.dart';
 import 'package:project/layout/news_app/news_layout.dart';
 import 'package:project/modules/bmi_result/bmi_result_screen.dart';
@@ -18,6 +19,8 @@ import 'package:project/shared/cubit/cubit.dart';
 import 'package:project/shared/network/local/cache_helper.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
 
+import 'layout/news_app/cubit/mode_theme/modetheme_states.dart';
+import 'layout/news_app/cubit/mode_theme/modetheme_states.dart';
 import 'layout/todo_app/home_layout.dart';
 import 'modules/user/user_screen.dart';
 
@@ -54,10 +57,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context)
   {
     return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..changeAppMode(
+      create: (BuildContext context) => ModethemeCubit()..changeAppMode(
         fromShared: isDark,
       ),
-      child: BlocConsumer<NewsCubit, NewsStates>(
+      child: BlocConsumer<ModethemeCubit, ModethemeStates>(
         listener: (context, state) {},
         builder: (context, state)
         {
@@ -132,7 +135,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            themeMode: NewsCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+            themeMode: ModethemeCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
             home: NewsLayout(),
           );
         },

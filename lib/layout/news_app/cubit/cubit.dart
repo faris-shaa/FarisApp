@@ -146,28 +146,6 @@ class NewsCubit extends Cubit<NewsStates>
     });
   }
 
-  bool isDark = false;
-
-  void changeAppMode({bool? fromShared})
-  {
-    if(fromShared != null)
-      {
-        isDark = fromShared;
-        emit(NewsAppChangeModeState());
-      }
-
-    else
-    {
-      isDark = !isDark;
-      CasheHelper.putBoolean(
-        key: 'isDark',
-        value: isDark,).then((value)
-      {
-        emit(NewsAppChangeModeState());
-      });
-    }
-
-  }
 
 
 
