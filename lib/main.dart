@@ -15,35 +15,48 @@ import 'package:project/modules/login/login_screen.dart';
 import 'package:project/modules/messnger_screen/messenger_screen.dart';
 import 'package:project/shared/bloc_observer.dart';
 import 'package:project/shared/cubit/cubit.dart';
+import 'package:project/shared/network/local/cache_helper.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
 
 import 'layout/todo_app/home_layout.dart';
 import 'modules/user/user_screen.dart';
 
 
-void main()
+void main() async
 {
+  WidgetsFlutterBinding.ensureInitialized();
+
   BlocOverrides.runZoned(()
            {
-             runApp(MyApp());
+
+             runApp(MyApp(true));
            },
     blocObserver: MyBlocObserver(),
   );
 
+
+
   DioHelper.init();
+  await CasheHelper.init();
+  bool? isDark = CasheHelper.getBoolean(key: 'isDark');
 
 
 }
 
-class MyApp extends StatelessWidget
-{
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+
+
+  final bool isDark;
+
+  MyApp(this.isDark);
 
   @override
   Widget build(BuildContext context)
   {
     return BlocProvider(
-      create: (BuildContext context) => NewsCubit(),
+      create: (BuildContext context) => NewsCubit()..changeAppMode(
+        fromShared: isDark,
+      ),
       child: BlocConsumer<NewsCubit, NewsStates>(
         listener: (context, state) {},
         builder: (context, state)

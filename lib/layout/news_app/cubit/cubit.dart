@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/layout/news_app/cubit/states.dart';
 import 'package:project/modules/business/business_screen.dart';
+import 'package:project/modules/search_screen/search_screen.dart';
 import 'package:project/modules/since/since_screen.dart';
 import 'package:project/modules/sports/sports_screen.dart';
+import 'package:project/shared/network/local/cache_helper.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
 
 class NewsCubit extends Cubit<NewsStates>
@@ -44,6 +46,7 @@ class NewsCubit extends Cubit<NewsStates>
     Business_Screen(),
     Sports_Screen(),
     Since_Screen(),
+    SearchScreen(),
 
   ];
 
@@ -59,6 +62,8 @@ class NewsCubit extends Cubit<NewsStates>
   List<dynamic> Business = [];
   List<dynamic> Sports = [];
   List<dynamic> Since = [];
+  List<dynamic> Search = [];
+
 
 
   void getBusiness ()
@@ -119,6 +124,7 @@ class NewsCubit extends Cubit<NewsStates>
   {
 
     emit(NewsSinceLoadingState());
+    Search = [];
 
     DioHelper.getData(
         url: 'v2/top-headlines',
@@ -142,10 +148,51 @@ class NewsCubit extends Cubit<NewsStates>
 
   bool isDark = false;
 
-  void changeAppMode()
+  void changeAppMode({bool? fromShared})
   {
-    isDark = !isDark;
-    emit(NewsAppChangeModeState());
+    if(fromShared != null)
+      {
+        isDark = fromShared;
+        emit(NewsAppChangeModeState());
+      }
+
+    else
+    {
+      isDark = !isDark;
+      CasheHelper.putBoolean(
+        key: 'isDark',
+        value: isDark,).then((value)
+      {
+        emit(NewsAppChangeModeState());
+      });
+    }
+
+  }
+
+
+
+  void getSearch (String value)
+  {
+
+    emit(NewsSearchLoadingState());
+
+    DioHelper.getData(
+        url: 'v2/everything',
+        query: {
+          'q':'$value',
+          'apiKey':'4a15ef6bec9e4a4e937464d6d0eb413b',
+        }).then((value)
+    {
+      Search = value.data['articles'];
+
+      print(Search[0]['title']);
+
+      emit(NewsGteSearchSuccessState());
+    }).catchError((error)
+    {
+      print(error.toString());
+      emit(NewsGetSearchErrorState(error.toString()));
+    });
   }
 
 }

@@ -44,3 +44,15 @@ class NewsGetSinceErrorState extends NewsStates
 }
 
 class NewsAppChangeModeState extends NewsStates {}
+
+class NewsSearchLoadingState extends NewsStates {}
+
+class NewsGteSearchSuccessState extends NewsStates {}
+
+
+class NewsGetSearchErrorState extends NewsStates
+{
+  late final String error;
+
+  NewsGetSearchErrorState(this.error);
+}

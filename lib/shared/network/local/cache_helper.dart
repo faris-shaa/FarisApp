@@ -10,7 +10,7 @@ class CasheHelper
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-   static Future<bool> putBool({
+   static Future<bool> putBoolean({
      required String key,
      required bool value,
 })async
@@ -18,7 +18,7 @@ class CasheHelper
    return await sharedPreferences!.setBool(key, value);
   }
 
-  static bool? getBool(
+  static bool? getBoolean(
       {
     required String key,
 

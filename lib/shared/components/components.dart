@@ -253,3 +253,11 @@ Widget articleBuilder(list, context) => ListView.separated(
   itemBuilder: (context, index) => buildArticleItems(list[index], context),
   separatorBuilder: (context, index) => myDivider(),
   itemCount: list.length,);
+
+
+void NavgateTo (context, widget) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);

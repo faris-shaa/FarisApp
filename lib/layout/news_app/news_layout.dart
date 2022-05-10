@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/layout/news_app/cubit/cubit.dart';
 import 'package:project/layout/news_app/cubit/states.dart';
+import 'package:project/modules/search_screen/search_screen.dart';
+import 'package:project/shared/components/components.dart';
 import 'package:project/shared/cubit/cubit.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
 
@@ -28,6 +30,7 @@ class NewsLayout extends StatelessWidget {
                 IconButton(
                   onPressed: ()
                   {
+                    NavgateTo(context, SearchScreen(),);
 
                   },
                   icon: Icon(
