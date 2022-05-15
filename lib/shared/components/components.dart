@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/modules/web_view/web_view_screen.dart';
+import 'package:project/modules/news_app/web_view/web_view_screen.dart';
 import 'package:project/shared/cubit/cubit.dart';
 
 class CostumTextFormFeild extends StatelessWidget

@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/layout/news_app/cubit/states.dart';
-import 'package:project/modules/business/business_screen.dart';
-import 'package:project/modules/search_screen/search_screen.dart';
-import 'package:project/modules/since/since_screen.dart';
-import 'package:project/modules/sports/sports_screen.dart';
-import 'package:project/shared/network/local/cache_helper.dart';
+import 'package:project/modules/news_app/business/business_screen.dart';
+import 'package:project/modules/news_app/since/since_screen.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
+
+import '../../../modules/news_app/search_screen/search_screen.dart';
+import '../../../modules/news_app/sports/sports_screen.dart';
 
 class NewsCubit extends Cubit<NewsStates>
 {

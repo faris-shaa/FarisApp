@@ -1,28 +1,15 @@
 import 'dart:ui';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:project/layout/news_app/cubit/cubit.dart';
 import 'package:project/layout/news_app/cubit/mode_theme/modetheme_cubit.dart';
-import 'package:project/layout/news_app/cubit/states.dart';
 import 'package:project/layout/news_app/news_layout.dart';
-import 'package:project/modules/bmi_result/bmi_result_screen.dart';
-import 'package:project/modules/bmi/bmi_screen.dart';
-import 'package:project/modules/counter/counter.dart';
-import 'package:project/modules/login/login_screen.dart';
-import 'package:project/modules/messnger_screen/messenger_screen.dart';
 import 'package:project/shared/bloc_observer.dart';
-import 'package:project/shared/cubit/cubit.dart';
 import 'package:project/shared/network/local/cache_helper.dart';
 import 'package:project/shared/network/remote/dio_helper.dart';
+import 'layout/news_app/cubit/mode_theme/modetheme_states.dart';
 
-import 'layout/news_app/cubit/mode_theme/modetheme_states.dart';
-import 'layout/news_app/cubit/mode_theme/modetheme_states.dart';
-import 'layout/todo_app/home_layout.dart';
-import 'modules/user/user_screen.dart';
 
 
 void main() async
