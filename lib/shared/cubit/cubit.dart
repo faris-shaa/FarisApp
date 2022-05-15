@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project/modules/archived_tasks/archived_tasks.dart';
-import 'package:project/modules/done_tasks/done_tasks.dart';
-import 'package:project/modules/new_tasks/new_tasks.dart';
+import 'package:project/modules/todo_app/archived_tasks/archived_tasks.dart';
+import 'package:project/modules/todo_app/done_tasks/done_tasks.dart';
+import 'package:project/modules/todo_app/new_tasks/new_tasks.dart';
 import 'package:project/shared/cubit/states.dart';
 import 'package:sqflite/sqflite.dart';
 
