@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/modules/news_app/web_view/web_view_screen.dart';
 import 'package:project/shared/cubit/cubit.dart';
 
-class CostumTextFormFeild extends StatelessWidget
-{
+class CostumTextFormFeild extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType type;
   final String label;
@@ -53,268 +52,150 @@ class CostumTextFormFeild extends StatelessWidget
       ),
     );
   }
-
-
 }
 
 Widget buildTaskItem(Map model, context) => Dismissible(
-  key: Key(model['id'].toString()),
-  child:   Padding(
-
-    padding: const EdgeInsets.all(20.0),
-
-    child: Row(
-
-      children:
-
-      [
-
-        CircleAvatar(
-
-          radius: 40.0,
-
-          child: Text(
-
-            '${model['time']}',
-
-          ),
-
-        ),
-
-        SizedBox(
-
-          width: 20.0,
-
-        ),
-
-        Expanded(
-
-          child: Column(
-
-            mainAxisSize: MainAxisSize.min,
-
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children:
-
-            [
-
-              Text(
-
-                '${model['title']}',
-
-                style: TextStyle(
-
-                  fontSize: 20.0,
-
-                  fontWeight: FontWeight.bold,
-
-                ),
-
+      key: Key(model['id'].toString()),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 40.0,
+              child: Text(
+                '${model['time']}',
               ),
-
-              Text(
-
-                '${model['date']}',
-
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${model['title']}',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '${model['date']}',
+                  ),
+                ],
               ),
-
-            ],
-
-          ),
-
-        ),
-
-        SizedBox(
-
-          width: 20.0,
-
-        ),
-
-        IconButton(
-
-            onPressed: ()
-
-            {
-
-              AppCubit.get(context).updateData(
-
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            IconButton(
+              onPressed: () {
+                AppCubit.get(context).updateData(
                   status: 'done',
+                  id: model['id'],
+                );
+              },
+              icon: Icon(
+                Icons.check_box,
+                color: Colors.lightGreen,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                AppCubit.get(context)
+                    .updateData(status: 'archive', id: model['id']);
+              },
+              icon: Icon(
+                Icons.archive,
+                color: Colors.black38,
+              ),
+            ),
+          ],
+        ),
+      ),
+      onDismissed: (direction) {
+        AppCubit.get(context).deletData(id: model['id']);
+      },
+    );
 
-                  id: model['id'],);
-
-            },
-
-            icon: Icon(
-
-              Icons.check_box,
-
-              color: Colors.lightGreen,
-
-            ),),
-
-        IconButton(
-
-          onPressed: ()
-
-          {
-
-            AppCubit.get(context).updateData(
-
-                status: 'archive',
-
-                id: model['id']);
-
-          },
-
-          icon: Icon(
-
-            Icons.archive,
-
-            color: Colors.black38,
-
-          ),),
-
-
-
-      ],
-
-    ),
-
-  ),
-  onDismissed: (direction)
-  {
-    AppCubit.get(context).deletData(id: model['id']);
-
-  },
-);
-
-
-
-Widget myDivider() =>  Container(
-  width: double.infinity,
-  height: 1,
-  color: Colors.grey[300],
-);
+Widget myDivider() => Container(
+      width: double.infinity,
+      height: 1,
+      color: Colors.grey[300],
+    );
 
 Widget buildArticleItems(article, context) => InkWell(
-
-  onTap: ()
-  {
-    NavgateTo(context, WebViewScreen(article['url']),);
-  },
-  child:   Padding(
-
-    padding: const EdgeInsets.all(20.0),
-
-    child: Row(
-
-      children:
-
-      [
-
-        Container(
-
-          height: 140.0,
-
-          width: 140.0,
-
-          decoration: BoxDecoration(
-
-            borderRadius: BorderRadius.circular(10.0),
-
-            image: DecorationImage(
-
-              image: NetworkImage('${article['urlToImage']}'),
-
-              fit: BoxFit.cover,
-
-            ),
-
-          ),
-
-        ),
-
-        SizedBox(
-
-          width: 20.0,
-
-        ),
-
-        Expanded(
-
-          child: Container(
-
-            height: 120.0,
-
-            child: Column(
-
-
-
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              mainAxisAlignment: MainAxisAlignment.start,
-
-              children:
-
-              [
-
-                Expanded(
-
-                  child: Text(
-
-                    '${article['title']}',
-
-                    style: Theme.of(context).textTheme.bodyText1,
-
-                    maxLines: 3,
-
-                    overflow: TextOverflow.ellipsis,
-
-                  ),
-
+      onTap: () {
+        NavigaTo(
+          context,
+          WebViewScreen(article['url']),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Container(
+              height: 140.0,
+              width: 140.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  image: NetworkImage('${article['urlToImage']}'),
+                  fit: BoxFit.cover,
                 ),
-
-                Text(
-
-                  '${article['publishedAt']}',
-
-                  style: TextStyle(
-
-                    color: Colors.grey,
-
-                  ),
-
-                ),
-
-              ],
-
+              ),
             ),
-
-          ),
-
+            SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Container(
+                height: 120.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${article['title']}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      '${article['publishedAt']}',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-
-      ],
-
-    ),
-
-  ),
-);
-
-
+      ),
+    );
 
 Widget articleBuilder(list, context) => ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) => buildArticleItems(list[index], context),
+      separatorBuilder: (context, index) => myDivider(),
+      itemCount: list.length,
+    );
 
-  physics: const BouncingScrollPhysics(),
-  itemBuilder: (context, index) => buildArticleItems(list[index], context),
-  separatorBuilder: (context, index) => myDivider(),
-  itemCount: list.length,);
+void NavigaTo(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
 
-
-void NavgateTo (context, widget) => Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => widget,
-  ),
-);
+void NavigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => widget),
+    (Route<dynamic> route) => false);

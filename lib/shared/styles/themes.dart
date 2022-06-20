@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/shared/styles/colors.dart';
 
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: HexColor('333739'),
-  primarySwatch: Colors.deepOrange,
+  primarySwatch: defaultColor,
   appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
     iconTheme: IconThemeData(
@@ -39,7 +40,7 @@ ThemeData darkTheme = ThemeData(
 );
 
 ThemeData lightTheme = ThemeData(
-  primarySwatch: Colors.deepOrange,
+  primarySwatch: defaultColor,
   scaffoldBackgroundColor: Colors.white,
   textTheme: TextTheme(
     bodyText1: TextStyle(
