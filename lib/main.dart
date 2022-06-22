@@ -19,22 +19,22 @@ import 'modules/news_app/business/business_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  await CasheHelper.init();
+  bool? isDark = CasheHelper.getBoolean(key: 'isDark');
 
   BlocOverrides.runZoned(
     () {
-      runApp(MyApp(true));
+      runApp(MyApp(isDark));
     },
     blocObserver: MyBlocObserver(),
   );
 
-  DioHelper.init();
-  await CasheHelper.init();
-  bool? isDark = CasheHelper.getBoolean(key: 'isDark');
+
 }
 
 class MyApp extends StatelessWidget {
-  bool? isDark;
-
+  final bool? isDark;
   MyApp(this.isDark);
 
   @override
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             themeMode: ModethemeCubit.get(context).isDark
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            home: NewsLayout(),
+            home: OnBoardingScreen(),
           );
         },
       ),
