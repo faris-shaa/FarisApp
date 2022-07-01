@@ -54,6 +54,43 @@ class CostumTextFormFeild extends StatelessWidget {
   }
 }
 
+Widget defaultButton ({
+
+  double width = double.infinity,
+  Color background = Colors.blue,
+  double radius = 0.0,
+  required Function()? function,
+  required String text,
+}) => Container(
+  width: width,
+  height: 40.0,
+  child: MaterialButton(
+    onPressed: function,
+    child: Text(
+      text.toUpperCase(),
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    ),
+  ),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(
+      radius,
+    ),
+    color: background,
+  ),
+);
+
+
+Widget defaultTextButton ({
+  required Function()? function,
+  required String text, String? child,
+}) => TextButton(
+  onPressed: function,
+  child: Text(text.toUpperCase()),);
+
+
+
 Widget buildTaskItem(Map model, context) => Dismissible(
       key: Key(model['id'].toString()),
       child: Padding(
