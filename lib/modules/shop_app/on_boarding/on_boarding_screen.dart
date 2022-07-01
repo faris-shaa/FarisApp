@@ -55,13 +55,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       appBar: AppBar(
         actions:
         [
-          TextButton(
-              onPressed: ()
-              {
-                NavigateAndFinish(context, ShopLoginScreen());
-
-              },
-              child: Text('SKIP'),),
+          defaultTextButton(function: ()
+          {
+            NavigateAndFinish(context, ShopLoginScreen());
+          },
+              text: 'SKIP'),
         ],
       ),
       body: Padding(

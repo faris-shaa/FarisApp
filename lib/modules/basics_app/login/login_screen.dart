@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20.0,
                   ),
                   CostumTextFormFeild(
-                    label: 'Email',
+                    label: 'Email Address',
                     prefix: Icon(
                       Icons.email,
                     ),
